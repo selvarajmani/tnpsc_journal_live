@@ -36,6 +36,7 @@ function App() {
     setEntries(newEntries);
   };
 
+  // Handle download of entries as JSON
   const handleDownload = () => {
     const data = new Blob([JSON.stringify(entries, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(data);
@@ -76,6 +77,7 @@ function App() {
         ))}
       </div>
 
+      {/* Add Download JSON Button */}
       <button onClick={handleDownload} className="mt-4 bg-green-500 text-white px-4 py-2 rounded">
         Download Entries as JSON
       </button>
