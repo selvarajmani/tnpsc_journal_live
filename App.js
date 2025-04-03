@@ -36,6 +36,16 @@ function App() {
     setEntries(newEntries);
   };
 
+  const handleDownload = () => {
+    const data = new Blob([JSON.stringify(entries, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(data);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'tnpsc-journal-entries.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-4 space-y-4 font-sans">
       <div className="bg-white shadow-md rounded-lg p-4 space-y-2">
@@ -65,6 +75,10 @@ function App() {
           </div>
         ))}
       </div>
+
+      <button onClick={handleDownload} className="mt-4 bg-green-500 text-white px-4 py-2 rounded">
+        Download Entries as JSON
+      </button>
     </div>
   );
 }
